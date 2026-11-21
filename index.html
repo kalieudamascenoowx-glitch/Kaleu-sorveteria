@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>SCOOPÉ · Helado artesanal para días más dulces</title>
+  <meta name="description" content="SCOOPÉ: helado artesanal elaborado en pequeños lotes con ingredientes de verdad. Fresa, pistacho, chocolate y mucho más en Malasaña, Madrid." />
+  <meta name="theme-color" content="#f6ede1" />
+  <meta property="og:title" content="SCOOPÉ · Un poco más de dulzura" />
+  <meta property="og:description" content="Helado artesanal. Ingredientes de verdad. Sabores atrevidos. Días más felices." />
+  <meta property="og:image" content="/images/og.jpg" />
+  <meta property="og:type" content="website" />
+  <script>
+    (function () {
+      var d = document.documentElement;
+      d.classList.add('js');
+      if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) d.classList.add('reduced');
+      // failsafe: if the app bundle never boots, reveal the page anyway
+      setTimeout(function () {
+        if (window.__scoopeReady) return;
+        d.classList.add('reduced');
+        document.body && document.body.classList.remove('is-loading');
+        var l = document.getElementById('loader'); l && l.parentNode.removeChild(l);
+      }, 8000);
+    })();
+  </script>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="preload" href="/images/copa.webp" as="image" type="image/webp" />
+</head>
+<body class="is-loading">
+  <!-- ============ LOADER ============ -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader__inner">
+      <svg class="loader__scoop" viewBox="0 0 120 150" aria-hidden="true">
+        <defs>
+          <clipPath id="ldClip"><path d="M60 8c25 0 44 18 44 40 0 6-1 10-3 14 5 2 8 6 8 11 0 7-6 12-14 12H25c-8 0-14-5-14-12 0-5 3-9 8-11-2-4-3-8-3-14 0-22 19-40 44-40z"/></clipPath>
+        </defs>
+        <path class="loader__cone" d="M24 86h72l-36 60z"/>
+        <path class="loader__cone-lines" d="M33 86l40 47M48 86l33 38M63 86l24 28M87 86l-40 47M72 86l-33 38M57 86l-24 28"/>
+        <path class="loader__outline" d="M60 8c25 0 44 18 44 40 0 6-1 10-3 14 5 2 8 6 8 11 0 7-6 12-14 12H25c-8 0-14-5-14-12 0-5 3-9 8-11-2-4-3-8-3-14 0-22 19-40 44-40z"/>
+        <g clip-path="url(#ldClip)"><rect class="loader__fill" x="0" y="0" width="120" height="90"/></g>
+      </svg>
+      <p class="loader__brand">SCOOPÉ</p>
+      <p class="loader__count"><span id="loaderCount">0</span>%</p>
+    </div>
+  </div>
+
+  <a class="skip" href="#sabores">Saltar al contenido</a>
+
+  <!-- ============ HEADER ============ -->
+  <header class="nav" id="nav">
+    <div class="nav__inner container">
+      <a class="logo" href="#inicio" aria-label="SCOOPÉ, inicio">
+        <span class="logo__word">SCOOPÉ</span>
+        <span class="logo__tag">Helado para días más dulces</span>
+      </a>
+      <nav class="nav__links" aria-label="Principal">
+        <a href="#inicio" class="is-active">Inicio</a>
+        <a href="#sabores">Sabores</a>
+        <a href="#historia">Nuestra historia</a>
+        <a href="#ingredientes">Ingredientes</a>
+        <a href="#encuentranos">Encuéntranos</a>
+      </nav>
+      <div class="nav__actions">
+        <button class="icon-btn" type="button" data-open-menu aria-label="Buscar sabores">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+        </button>
+        <a class="btn btn--dark btn--sm magnetic" href="#encuentranos"><span>Pedir ahora</span></a>
+        <button class="burger" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu"><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <nav aria-label="Menú móvil">
+      <a href="#inicio"><span>01</span>Inicio</a>
+      <a href="#sabores"><span>02</span>Sabores</a>
+      <a href="#copa"><span>03</span>Monta tu copa</a>
+      <a href="#historia"><span>04</span>Nuestra historia</a>
+      <a href="#ingredientes"><span>05</span>Ingredientes</a>
+      <a href="#encuentranos"><span>06</span>Encuéntranos</a>
+    </nav>
+    <p class="mobile-menu__foot script">Buen helado, mejores días ♡</p>
+  </div>
+
+  <main id="main">
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="inicio" aria-label="Presentación">
+      <div class="hero__bg" aria-hidden="true">
+        <div class="hero__blob" data-depth="0.25"></div>
+        <svg class="leaf leaf--a" data-depth="0.6" viewBox="0 0 200 200"><use href="#leafSym"/></svg>
+        <svg class="leaf leaf--b" data-depth="0.9" viewBox="0 0 200 200"><use href="#leafSym"/></svg>
+        <svg class="leaf leaf--c" data-depth="0.4" viewBox="0 0 200 200"><use href="#leafSym"/></svg>
+        <svg class="hero__lines" viewBox="0 0 1440 900" preserveAspectRatio="none">
+          <path d="M-20 720C240 640 380 820 640 760S1100 560 1460 640"/>
+          <path d="M-20 780C300 700 420 900 700 820S1120 640 1460 720"/>
+        </svg>
+      </div>
+
+      <div class="hero__stage" aria-hidden="true">
+        <canvas class="hero__canvas" id="heroCanvas"></canvas>
+        <img class="hero__fallback" src="/images/copa.webp" alt="" width="1200" height="1042" />
+      </div>
+
+      <div class="hero__content container">
+        <p class="eyebrow reveal-up">Helado artesanal</p>
+        <h1 class="hero__title">
+          <span class="line"><span>Un poco más</span></span>
+          <span class="line"><span>de <em>Dulzura.</em></span></span>
+        </h1>
+        <p class="hero__lead reveal-up">Ingredientes de verdad. Sabores atrevidos. Días más felices. Elaborado en pequeños lotes para grandes momentos.</p>
+        <div class="hero__cta reveal-up">
+          <a class="btn btn--brand magnetic" href="#sabores"><span>Descubrir sabores</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="link-u" href="#copa">Monta tu copa</a>
+        </div>
+        <ul class="hero__features reveal-up" aria-label="Lo que nos define">
+          <li><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M7 25c0-10 7-17 19-18-1 12-8 19-18 19M7 25l9-9"/></svg><span>Ingredientes<br />naturales</span></li>
+          <li><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 26S5 19.5 5 12.2C5 8.8 7.6 6 10.9 6c2.2 0 4 1.2 5.1 3 1.1-1.8 2.9-3 5.1-3C24.4 6 27 8.8 27 12.2 27 19.5 16 26 16 26z"/></svg><span>Pequeños<br />lotes</span></li>
+          <li><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M10 15a6 6 0 1 1 12 0M9 15h14l-7 13z"/><path d="M12 19l5 5M20 19l-5 5"/></svg><span>Hecho<br />con amor</span></li>
+        </ul>
+      </div>
+
+      <div class="badge-cookie" data-depth="0.5" aria-hidden="true">
+        <svg viewBox="0 0 200 200">
+          <defs><path id="badgeCircle" d="M100 100m-66 0a66 66 0 1 1 132 0a66 66 0 1 1 -132 0"/></defs>
+          <path class="badge-cookie__edge" d="M100 8l9 5 10-3 7 7 10 0 4 9 9 3 1 10 8 6-3 9 5 9-5 8 3 10-8 6-1 10-9 3-4 9-10 0-7 7-10-3-9 5-9-5-10 3-7-7-10 0-4-9-9-3-1-10-8-6 3-10-5-8 5-9-3-9 8-6 1-10 9-3 4-9 10 0 7-7 10 3z"/>
+          <g class="badge-cookie__grid"><path d="M40 70h120M36 100h128M40 130h120M70 40v120M100 36v128M130 40v120"/></g>
+          <text><textPath href="#badgeCircle" startOffset="0">SCOOP · DÍAS MÁS FELICES · SCOOP · DÍAS MÁS FELICES ·</textPath></text>
+          <text class="badge-cookie__center" x="100" y="108" text-anchor="middle">★</text>
+        </svg>
+      </div>
+      <p class="hero__note script" aria-hidden="true" data-depth="0.7">Buen helado,<br />mejores días</p>
+
+      <a class="scroll-hint" href="#sabores" aria-label="Desplázate hacia abajo"><span></span>Desliza</a>
+    </section>
+
+    <!-- ============ MARQUEE ============ -->
+    <div class="marquees" aria-hidden="true">
+      <div class="marquee marquee--brand" data-marquee="1">
+        <div class="marquee__track">
+          <span>Fresa</span><i>✦</i><span>Pistacho</span><i>✦</i><span>Chocolate</span><i>✦</i><span>Vainilla bourbon</span><i>✦</i><span>Turrón</span><i>✦</i><span>Mango</span><i>✦</i>
+        </div>
+      </div>
+      <div class="marquee marquee--light" data-marquee="-1">
+        <div class="marquee__track">
+          <span>Hecho cada mañana</span><i>●</i><span>Sin colorantes</span><i>●</i><span>Lotes pequeños</span><i>●</i><span>Desde 2014</span><i>●</i>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ FLAVORS ============ -->
+    <section class="flavors torn-top" id="sabores" aria-labelledby="flavorsTitle">
+      <div class="container flavors__grid">
+        <div class="flavors__intro">
+          <h2 class="title split-lines" id="flavorsTitle"><span class="line"><span>Nuestros</span></span><span class="line"><span>sabores</span></span><span class="line"><span><em>estrella</em></span></span></h2>
+          <p class="reveal-up">Elaborados con cariño. Únicos de verdad. Siempre una buena idea.</p>
+          <button class="link-u reveal-up" type="button" data-open-menu>Ver todos los sabores <span aria-hidden="true">→</span></button>
+          <div class="carousel__controls reveal-up">
+            <button class="round-btn" type="button" data-carousel-prev aria-label="Sabor anterior"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
+            <button class="round-btn" type="button" data-carousel-next aria-label="Sabor siguiente"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+            <div class="carousel__progress"><span></span></div>
+          </div>
+        </div>
+
+        <div class="carousel" data-carousel>
+          <ul class="carousel__track" role="list">
+            <li class="fcard" style="--c:#e9a3ad">
+              <div class="fcard__inner tilt">
+                <div class="fcard__text">
+                  <h3>Fresa<br />Bliss</h3>
+                  <p>Fresas de verdad, felicidad de verdad.</p>
+                </div>
+                <img class="fcard__img" src="/images/sabor-fresa.webp" alt="Bola de helado de fresa con sirope" loading="lazy" width="900" height="691" />
+                <div class="fcard__foot"><span class="fcard__price">3,90 €</span><button class="round-btn round-btn--light" type="button" data-open-menu data-flavor="Fresa Bliss" aria-label="Ver Fresa Bliss en la carta"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
+                <span class="fcard__glare" aria-hidden="true"></span>
+              </div>
+            </li>
+            <li class="fcard" style="--c:#c9c993">
+              <div class="fcard__inner tilt">
+                <div class="fcard__text">
+                  <h3>Sueño de<br />Pistacho</h3>
+                  <p>Rico, tostado, inolvidablemente cremoso.</p>
+                </div>
+                <img class="fcard__img" src="/images/sabor-pistacho.webp" alt="Bola de helado de pistacho" loading="lazy" width="900" height="687" />
+                <div class="fcard__foot"><span class="fcard__price">4,20 €</span><button class="round-btn round-btn--light" type="button" data-open-menu data-flavor="Sueño de Pistacho" aria-label="Ver Sueño de Pistacho en la carta"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
+                <span class="fcard__glare" aria-hidden="true"></span>
+              </div>
+            </li>
+            <li class="fcard fcard--dark" style="--c:#5b3324">
+              <div class="fcard__inner tilt">
+                <div class="fcard__text">
+                  <h3>Obsesión de<br />Chocolate</h3>
+                  <p>Intenso, aterciopelado. Para amantes de verdad.</p>
+                </div>
+                <img class="fcard__img" src="/images/sabor-chocolate.webp" alt="Bola de helado de chocolate con trozos de cacao" loading="lazy" width="900" height="691" />
+                <div class="fcard__foot"><span class="fcard__price">4,20 €</span><button class="round-btn round-btn--light" type="button" data-open-menu data-flavor="Obsesión de Chocolate" aria-label="Ver Obsesión de Chocolate en la carta"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
+                <span class="fcard__glare" aria-hidden="true"></span>
+              </div>
+            </li>
+            <li class="fcard" style="--c:#efe0c3">
+              <div class="fcard__inner tilt">
+                <div class="fcard__text">
+                  <h3>Vainilla<br />Bourbon</h3>
+                  <p>Vaina de Madagascar, infusionada 24 horas.</p>
+                </div>
+                <img class="fcard__img" src="/images/sabor-vainilla.webp" alt="Bola de helado de vainilla" loading="lazy" width="900" height="696" />
+                <div class="fcard__foot"><span class="fcard__price">3,90 €</span><button class="round-btn round-btn--light" type="button" data-open-menu data-flavor="Vainilla Bourbon" aria-label="Ver Vainilla Bourbon en la carta"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
+                <span class="fcard__glare" aria-hidden="true"></span>
+              </div>
+            </li>
+            <li class="fcard" style="--c:#dcbb8b">
+              <div class="fcard__inner tilt">
+                <div class="fcard__text">
+                  <h3>Turrón<br />de Jijona</h3>
+                  <p>Almendra tostada y miel. Navidad, todo el año.</p>
+                </div>
+                <img class="fcard__img" src="/images/sabor-turron.webp" alt="Bola de helado de turrón" loading="lazy" width="900" height="691" />
+                <div class="fcard__foot"><span class="fcard__price">4,50 €</span><button class="round-btn round-btn--light" type="button" data-open-menu data-flavor="Turrón de Jijona" aria-label="Ver Turrón de Jijona en la carta"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
+                <span class="fcard__glare" aria-hidden="true"></span>
+              </div>
+            </li>
+            <li class="fcard" style="--c:#f2b44f">
+              <div class="fcard__inner tilt">
+                <div class="fcard__text">
+                  <h3>Mango &amp;<br />Maracuyá</h3>
+                  <p>Sorbete tropical, 100% fruta y vegano.</p>
+                </div>
+                <img class="fcard__img" src="/images/sabor-mango.webp" alt="Bola de sorbete de mango" loading="lazy" width="900" height="691" />
+                <div class="fcard__foot"><span class="fcard__price">3,90 €</span><button class="round-btn round-btn--light" type="button" data-open-menu data-flavor="Mango & Maracuyá" aria-label="Ver Mango y Maracuyá en la carta"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
+                <span class="fcard__glare" aria-hidden="true"></span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="stamp" aria-hidden="true">
+        <svg viewBox="0 0 160 160">
+          <defs><path id="stampCircle" d="M80 80m-58 0a58 58 0 1 1 116 0a58 58 0 1 1 -116 0"/></defs>
+          <circle cx="80" cy="80" r="72"/><circle cx="80" cy="80" r="44"/>
+          <text><textPath href="#stampCircle">BUEN HUMOR · SIEMPRE · BUENA IDEA ·</textPath></text>
+          <text class="stamp__c" x="80" y="88" text-anchor="middle">♡</text>
+        </svg>
+      </div>
+    </section>
+
+    <!-- ============ BUILD YOUR CUP (scroll story) ============ -->
+    <section class="build" id="copa" aria-labelledby="buildTitle">
+      <div class="build__pin">
+        <div class="build__bgword" aria-hidden="true">COPA</div>
+        <div class="build__spot" aria-hidden="true"></div>
+        <div class="build__stage" aria-hidden="true">
+          <canvas class="build__canvas" id="buildCanvas"></canvas>
+          <img class="build__fallback" src="/images/copa.webp" alt="" loading="lazy" width="1200" height="1042" />
+        </div>
+
+        <div class="build__ui container">
+          <header class="build__head">
+            <p class="eyebrow eyebrow--light">Experiencia SCOOPÉ</p>
+            <h2 class="title title--light" id="buildTitle">Monta tu <em>copa</em></h2>
+            <p class="build__sub">Desliza y mira cómo nace tu copa perfecta.</p>
+          </header>
+
+          <ol class="build__steps" aria-label="Pasos de la copa">
+            <li class="bstep is-active" data-step="0"><span class="bstep__n">01</span><div><h3>La base</h3><p>Copa de cerámica, enfriada a −12 °C.</p></div></li>
+            <li class="bstep" data-step="1"><span class="bstep__n">02</span><div><h3>Fresa Bliss</h3><p>Fresas de Huelva, recién trituradas.</p></div></li>
+            <li class="bstep" data-step="2"><span class="bstep__n">03</span><div><h3>Sueño de Pistacho</h3><p>Pistacho tostado, cremoso de verdad.</p></div></li>
+            <li class="bstep" data-step="3"><span class="bstep__n">04</span><div><h3>Obsesión de Chocolate</h3><p>Cacao 70 % de Ecuador.</p></div></li>
+            <li class="bstep" data-step="4"><span class="bstep__n">05</span><div><h3>El toque final</h3><p>Sirope de frutos rojos, barquillo, cacao y menta.</p></div></li>
+          </ol>
+
+          <div class="build__ticket" aria-live="polite">
+            <p class="build__ticket-label">Tu copa</p>
+            <p class="build__price"><span id="buildPrice">2,50</span> €</p>
+            <a class="btn btn--honey btn--sm build__cta" href="#encuentranos"><span>Pídela ya</span></a>
+          </div>
+
+          <div class="build__progress" aria-hidden="true"><span></span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ STORY ============ -->
+    <section class="story torn-top" id="historia" aria-labelledby="storyTitle">
+      <div class="container story__grid">
+        <figure class="story__media">
+          <div class="story__mask">
+            <img src="/images/cucuruchos.webp" alt="Dos cucuruchos de helado de fresa y vainilla" loading="lazy" width="658" height="682" />
+          </div>
+          <figcaption class="script story__caption">Mejores<br />ingredientes,<br />días más<br />brillantes</figcaption>
+        </figure>
+
+        <div class="story__text">
+          <h2 class="title split-lines" id="storyTitle"><span class="line"><span>Más que</span></span><span class="line"><span>helado.</span></span></h2>
+          <p class="reveal-up">Es un sentimiento. Un momento. Un poco de alegría en tu día a día. En SCOOPÉ creemos que un buen helado hace el mundo más amable y más brillante.</p>
+          <a class="btn btn--brand magnetic reveal-up" href="#ingredientes"><span>Nuestra historia</span></a>
+          <ul class="values reveal-up">
+            <li><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M7 25c0-10 7-17 19-18-1 12-8 19-18 19M7 25l9-9"/></svg>Ingredientes<br />reales</li>
+            <li><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="5"/><path d="M16 4v4M16 24v4M4 16h4M24 16h4M7.5 7.5l2.8 2.8M21.7 21.7l2.8 2.8M7.5 24.5l2.8-2.8M21.7 10.3l2.8-2.8"/></svg>Días más<br />felices</li>
+            <li><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="11" cy="11" r="4"/><circle cx="21" cy="11" r="4"/><path d="M4 26c0-5 3-8 7-8s7 3 7 8M14 26c0-5 3-8 7-8s7 3 7 8"/></svg>Una comunidad<br />más dulce</li>
+          </ul>
+        </div>
+
+        <p class="story__motto script" aria-hidden="true">Saborea<br />Comparte<br />Sonríe<br />Repite</p>
+      </div>
+
+      <div class="container counters" aria-label="SCOOPÉ en cifras">
+        <div class="counter"><p class="counter__n"><span data-count="12">0</span></p><p>años haciendo helado</p></div>
+        <div class="counter"><p class="counter__n"><span data-count="48">0</span></p><p>sabores en rotación</p></div>
+        <div class="counter"><p class="counter__n"><span data-count="100">0</span>%</p><p>ingredientes naturales</p></div>
+        <div class="counter"><p class="counter__n">+<span data-count="30" data-suffix="k">0</span></p><p>clientes felices</p></div>
+      </div>
+    </section>
+
+    <!-- ============ INGREDIENTS ============ -->
+    <section class="ingredients" id="ingredientes" aria-labelledby="ingTitle">
+      <svg class="ingredients__path" viewBox="0 0 1200 400" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0 220C160 120 260 330 420 230S700 80 820 210 1060 330 1200 160"/>
+      </svg>
+      <div class="container">
+        <header class="section-head">
+          <p class="eyebrow">Origen</p>
+          <h2 class="title split-lines" id="ingTitle"><span class="line"><span>Del campo</span></span><span class="line"><span>a tu <em>cuchara</em></span></span></h2>
+        </header>
+        <ul class="ing-grid">
+          <li class="ing">
+            <svg class="draw" viewBox="0 0 80 80" aria-hidden="true"><path d="M40 20c14 0 22 10 22 22 0 16-14 28-22 28S18 58 18 42c0-12 8-22 22-22z"/><path d="M30 18c4 2 7 2 10 0 3 2 6 2 10 0M40 12v8"/><path d="M32 36h.1M46 40h.1M38 50h.1M50 52h.1M30 48h.1"/></svg>
+            <h3>Fresas de Huelva</h3><p>Recogidas en su punto, trituradas el mismo día.</p><span class="ing__tag">Andalucía</span>
+          </li>
+          <li class="ing">
+            <svg class="draw" viewBox="0 0 80 80" aria-hidden="true"><path d="M22 48c-4-16 8-30 22-30 12 0 18 10 16 20-2 14-16 24-28 22-5-1-9-6-10-12z"/><path d="M36 30c6 4 10 12 8 22"/></svg>
+            <h3>Pistacho de Bronte</h3><p>Tostado lento para un sabor profundo y verde.</p><span class="ing__tag">Sicilia</span>
+          </li>
+          <li class="ing">
+            <svg class="draw" viewBox="0 0 80 80" aria-hidden="true"><path d="M20 24h40v36H20z"/><path d="M20 36h40M20 48h40M33 24v36M47 24v36"/></svg>
+            <h3>Cacao 70 %</h3><p>De pequeños productores, comercio justo.</p><span class="ing__tag">Ecuador</span>
+          </li>
+          <li class="ing">
+            <svg class="draw" viewBox="0 0 80 80" aria-hidden="true"><path d="M30 14h20v8l6 10v34H24V32l6-10z"/><path d="M30 22h20M24 44c8-4 16 4 32 0"/></svg>
+            <h3>Leche fresca</h3><p>De vacas de pasto, sin aditivos ni atajos.</p><span class="ing__tag">Asturias</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ LOCATION ============ -->
+    <section class="visit torn-top" id="encuentranos" aria-labelledby="visitTitle">
+      <div class="container visit__grid">
+        <div class="visit__card">
+          <p class="eyebrow">Encuéntranos</p>
+          <h2 class="title split-lines" id="visitTitle"><span class="line"><span>Ven a por</span></span><span class="line"><span>tu <em>bola</em></span></span></h2>
+          <p class="visit__status" id="openStatus"><span class="dot"></span><span class="txt">Consultando horario…</span></p>
+          <address>
+            <strong>SCOOPÉ Malasaña</strong><br />
+            Calle de la Dulzura, 14<br />
+            28004 Madrid, España
+          </address>
+          <table class="hours" aria-label="Horario">
+            <tbody>
+              <tr data-days="1,2,3,4"><th scope="row">Lunes – Jueves</th><td>12:00 – 22:00</td></tr>
+              <tr data-days="5,6"><th scope="row">Viernes – Sábado</th><td>12:00 – 00:00</td></tr>
+              <tr data-days="0"><th scope="row">Domingo</th><td>11:00 – 22:00</td></tr>
+            </tbody>
+          </table>
+          <div class="visit__actions">
+            <a class="btn btn--brand magnetic" href="https://www.google.com/maps/search/?api=1&query=Malasa%C3%B1a%2C%20Madrid" target="_blank" rel="noopener"><span>Cómo llegar</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+            <a class="btn btn--ghost" href="tel:+34910000000"><span>+34 910 000 000</span></a>
+          </div>
+          <p class="visit__demo">* Dirección y teléfono ficticios · sitio demo</p>
+        </div>
+
+        <div class="map" aria-label="Mapa ilustrado de la zona" role="img">
+          <svg viewBox="0 0 600 520" preserveAspectRatio="xMidYMid slice">
+            <rect width="600" height="520" class="map__bg"/>
+            <path class="map__park" d="M380 40c60-10 120 20 140 70s-10 90-60 100-110-20-120-70 0-90 40-100z"/>
+            <g class="map__blocks">
+              <path d="M40 40h120v90H40zM190 40h150v60H190zM40 160h90v110H40zM160 130h100v80H160zM290 130h70v120H290zM40 300h130v90H40zM200 240h130v80H200zM360 250h100v80H360zM480 230h90v110H480zM200 350h110v130H200zM340 360h120v120H340zM40 420h130v80H40zM490 370h80v110H490z"/>
+            </g>
+            <g class="map__streets">
+              <path d="M0 145h600M0 285h600M0 405h600M175 0v520M345 0v520M470 0v520"/>
+              <path class="map__avenue" d="M0 500L600 20"/>
+            </g>
+            <path class="map__route" d="M80 470C120 420 150 400 175 340S260 285 345 285 400 220 410 175"/>
+            <circle class="map__start" cx="80" cy="470" r="8"/>
+            <g class="map__pin" transform="translate(410 175)">
+              <circle class="map__pulse" r="22"/>
+              <path d="M0 0c-16-18-24-30-24-42a24 24 0 0 1 48 0c0 12-8 24-24 42z"/>
+              <circle cy="-42" r="9" class="map__pin-dot"/>
+            </g>
+            <text x="420" y="88" class="map__label">Plaza del Dos de Mayo</text>
+            <text x="190" y="138" class="map__label">C/ de la Dulzura</text>
+            <text x="20" y="278" class="map__label">C/ San Bernardo</text>
+          </svg>
+          <div class="map__card"><strong>SCOOPÉ</strong><span>3 min a pie desde Tribunal (L1 · L10)</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ NEWSLETTER ============ -->
+    <section class="join torn-top" aria-labelledby="joinTitle">
+      <div class="join__grid">
+        <div class="join__form-wrap">
+          <h2 class="title title--sm" id="joinTitle">Únete al <em>Sweet Circle</em></h2>
+          <p>Sabores exclusivos, sorpresas especiales y un poco más de alegría en tu bandeja de entrada.</p>
+          <form class="join__form" id="joinForm" novalidate>
+            <label class="sr-only" for="joinEmail">Tu correo electrónico</label>
+            <input id="joinEmail" name="email" type="email" inputmode="email" autocomplete="email" placeholder="Tu correo electrónico" required />
+            <button class="btn btn--honey" type="submit"><span>Suscribirme</span></button>
+          </form>
+          <p class="join__msg" id="joinMsg" role="status" aria-live="polite"></p>
+        </div>
+        <div class="join__img" aria-hidden="true"><img src="/images/sabor-fresa.webp" alt="" loading="lazy" width="900" height="691" /></div>
+        <div class="join__green"><p class="script">La felicidad<br />llega en<br />bolas</p></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="container footer__grid">
+      <a class="logo logo--lg" href="#inicio" aria-label="Volver arriba"><span class="logo__word">SCOOPÉ</span><span class="logo__tag">Helado para días más dulces</span></a>
+      <nav class="footer__links" aria-label="Pie de página">
+        <a href="#sabores">Sabores</a><a href="#copa">Monta tu copa</a><a href="#historia">Historia</a><a href="#encuentranos">Visítanos</a>
+      </nav>
+      <ul class="socials" aria-label="Redes sociales">
+        <li><a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r=".6" class="fill"/></svg></a></li>
+        <li><a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M14 8h3V4h-3c-2.8 0-4.5 1.8-4.5 4.6V11H7v4h2.5v6h4v-6H16l1-4h-3.5V9c0-.6.4-1 1-1z" class="fill"/></svg></a></li>
+        <li><a href="https://pinterest.com" target="_blank" rel="noopener" aria-label="Pinterest"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M10.5 20l2-8.5M12 9.5c2.5-1 4.5.6 4 3-.5 2.5-3 3.2-4 1.8"/></svg></a></li>
+        <li><a href="https://youtube.com" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="4"/><path d="M10.5 9.5v5l4-2.5z" class="fill"/></svg></a></li>
+      </ul>
+    </div>
+    <div class="container footer__bottom">
+      <p>© <span id="year">2026</span> SCOOPÉ · Sitio demo de portafolio</p>
+      <a href="#inicio" class="link-u">Volver arriba ↑</a>
+    </div>
+  </footer>
+
+  <!-- ============ MENU / SEARCH DIALOG ============ -->
+  <dialog class="menu-dialog" id="menuDialog" aria-labelledby="menuTitle">
+    <div class="menu-dialog__box">
+      <header class="menu-dialog__head">
+        <h2 id="menuTitle" class="title title--sm">Nuestra <em>carta</em></h2>
+        <button class="icon-btn" type="button" data-close-menu aria-label="Cerrar carta"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+      </header>
+      <div class="menu-dialog__search">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+        <label class="sr-only" for="menuSearch">Buscar sabor</label>
+        <input id="menuSearch" type="search" placeholder="Busca un sabor, p. ej. «pistacho»" autocomplete="off" />
+      </div>
+      <div class="chips" role="group" aria-label="Filtrar">
+        <button type="button" class="chip is-on" data-filter="all" aria-pressed="true">Todos</button>
+        <button type="button" class="chip" data-filter="fruta" aria-pressed="false">Frutales</button>
+        <button type="button" class="chip" data-filter="crema" aria-pressed="false">Cremosos</button>
+        <button type="button" class="chip" data-filter="vegano" aria-pressed="false">Veganos</button>
+      </div>
+      <ul class="menu-list" id="menuList" data-lenis-prevent></ul>
+      <p class="menu-empty" id="menuEmpty" hidden>No encontramos ese sabor… ¡todavía! 🍨</p>
+    </div>
+  </dialog>
+
+  <!-- shared leaf symbol -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="leafSym" viewBox="0 0 200 200">
+      <path fill="#4c6b2a" d="M30 170C20 100 70 30 175 22c4 90-50 150-145 148z"/>
+      <path fill="#5d7f34" d="M30 170C60 120 110 70 175 22c4 90-50 150-145 148z"/>
+      <path fill="none" stroke="#86a457" stroke-width="2.5" stroke-linecap="round" d="M30 170C70 120 120 70 175 22M75 128c10-4 30-6 45-2M100 98c8-6 26-12 40-12M58 150c8-2 20 0 30 4M120 70c2-12 6-24 14-32"/>
+    </symbol>
+  </svg>
+
+  <div class="cursor" aria-hidden="true"><span></span></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
