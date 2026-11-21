@@ -71,8 +71,10 @@ function initBuildLazy() {
   if (!hasGL) return;
   const section = $('#copa');
   let started = false;
-  const io = new IntersectionObserver(async ([e]) => {
-    if (!e.isIntersecting || started) return;
+  // Build the cup scene while the browser is idle right after the intro (never mid-scroll).
+  // The IntersectionObserver is only a safety net if someone scrolls there instantly.
+  const start = async () => {
+    if (started) return;
     started = true;
     io.disconnect();
     try {
@@ -83,8 +85,11 @@ function initBuildLazy() {
       console.warn('[build] WebGL fallback', err);
       html.classList.add('no-webgl');
     }
-  }, { rootMargin: '150% 0px' });
+  };
+  const io = new IntersectionObserver(([e]) => e.isIntersecting && start(), { rootMargin: '200% 0px' });
   io.observe(section);
+  const idle = window.requestIdleCallback || ((cb) => setTimeout(cb, 1));
+  setTimeout(() => idle(start, { timeout: 1500 }), 2200);
 }
 
 /* ---------------- scroll choreography ---------------- */
@@ -122,7 +127,8 @@ function setupScroll() {
     gsap.to('.stamp', { rotate: 200, ease: 'none', scrollTrigger: { trigger: '.flavors', start: 'top bottom', end: 'bottom top', scrub: true } });
 
     /* story: mask opens, cones parallax */
-    gsap.fromTo('.story__mask', { clipPath: 'inset(16% 12% 16% 12% round 30px)' }, { clipPath: 'inset(0% 0% 0% 0% round 30px)', ease: 'none', scrollTrigger: { trigger: '.story__media', start: 'top 90%', end: 'center 55%', scrub: true } });
+    // transform-only (composited) instead of an animated clip-path, which repaints every frame on Safari
+    gsap.fromTo('.story__mask', { scale: 0.8, rotate: -2 }, { scale: 1, rotate: 0, ease: 'none', scrollTrigger: { trigger: '.story__media', start: 'top 95%', end: 'center 55%', scrub: true } });
     gsap.fromTo('.story__mask img', { yPercent: 18, rotate: -6, scale: 1.12 }, { yPercent: -6, rotate: 2, scale: 1, ease: 'none', scrollTrigger: { trigger: '.story__media', start: 'top bottom', end: 'bottom top', scrub: true } });
     gsap.from('.story__caption', { opacity: 0, x: -30, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: '.story__media', start: 'top 60%', toggleActions: 'play none none reverse' } });
     gsap.from('.story__motto', { opacity: 0, rotate: -20, scale: 0.8, duration: 1, ease: 'back.out(2)', scrollTrigger: { trigger: '.story', start: 'top 60%', toggleActions: 'play none none reverse' } });
@@ -184,7 +190,6 @@ function setupScroll() {
       end: () => '+=' + window.innerHeight * 4,
       scrub: 0.6,
       animation: tl,
-      anticipatePin: 1,
       invalidateOnRefresh: true,
       onUpdate(self) {
         const p = self.progress;

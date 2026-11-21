@@ -25,7 +25,6 @@
     })();
   </script>
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-  <link rel="preload" href="/images/copa.webp" as="image" type="image/webp" />
 </head>
 <body class="is-loading">
   <!-- ============ LOADER ============ -->
@@ -99,7 +98,7 @@
 
       <div class="hero__stage" aria-hidden="true">
         <canvas class="hero__canvas" id="heroCanvas"></canvas>
-        <img class="hero__fallback" src="/images/copa.webp" alt="" width="1200" height="1042" />
+        <img class="hero__fallback" src="/images/copa.webp" alt="" width="1200" height="1042" decoding="async" />
       </div>
 
       <div class="hero__content container">
@@ -170,7 +169,7 @@
                   <h3>Fresa<br />Bliss</h3>
                   <p>Fresas de verdad, felicidad de verdad.</p>
                 </div>
-                <img class="fcard__img" src="/images/sabor-fresa.webp" alt="Bola de helado de fresa con sirope" loading="lazy" width="900" height="691" />
+                <img class="fcard__img" src="/images/sabor-fresa.webp" alt="Bola de helado de fresa con sirope" loading="lazy" width="680" height="522" decoding="async" />
                 <div class="fcard__foot"><span class="fcard__price">3,90 €</span><button class="round-btn round-btn--light" type="button" data-open-menu data-flavor="Fresa Bliss" aria-label="Ver Fresa Bliss en la carta"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
                 <span class="fcard__glare" aria-hidden="true"></span>
               </div>
@@ -181,7 +180,7 @@
                   <h3>Sueño de<br />Pistacho</h3>
                   <p>Rico, tostado, inolvidablemente cremoso.</p>
                 </div>
-                <img class="fcard__img" src="/images/sabor-pistacho.webp" alt="Bola de helado de pistacho" loading="lazy" width="900" height="687" />
+                <img class="fcard__img" src="/images/sabor-pistacho.webp" alt="Bola de helado de pistacho" loading="lazy" width="680" height="519" decoding="async" />
                 <div class="fcard__foot"><span class="fcard__price">4,20 €</span><button class="round-btn round-btn--light" type="button" data-open-menu data-flavor="Sueño de Pistacho" aria-label="Ver Sueño de Pistacho en la carta"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
                 <span class="fcard__glare" aria-hidden="true"></span>
               </div>
@@ -192,7 +191,7 @@
                   <h3>Obsesión de<br />Chocolate</h3>
                   <p>Intenso, aterciopelado. Para amantes de verdad.</p>
                 </div>
-                <img class="fcard__img" src="/images/sabor-chocolate.webp" alt="Bola de helado de chocolate con trozos de cacao" loading="lazy" width="900" height="691" />
+                <img class="fcard__img" src="/images/sabor-chocolate.webp" alt="Bola de helado de chocolate con trozos de cacao" loading="lazy" width="680" height="522" decoding="async" />
                 <div class="fcard__foot"><span class="fcard__price">4,20 €</span><button class="round-btn round-btn--light" type="button" data-open-menu data-flavor="Obsesión de Chocolate" aria-label="Ver Obsesión de Chocolate en la carta"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
                 <span class="fcard__glare" aria-hidden="true"></span>
               </div>
@@ -203,7 +202,7 @@
                   <h3>Vainilla<br />Bourbon</h3>
                   <p>Vaina de Madagascar, infusionada 24 horas.</p>
                 </div>
-                <img class="fcard__img" src="/images/sabor-vainilla.webp" alt="Bola de helado de vainilla" loading="lazy" width="900" height="696" />
+                <img class="fcard__img" src="/images/sabor-vainilla.webp" alt="Bola de helado de vainilla" loading="lazy" width="680" height="526" decoding="async" />
                 <div class="fcard__foot"><span class="fcard__price">3,90 €</span><button class="round-btn round-btn--light" type="button" data-open-menu data-flavor="Vainilla Bourbon" aria-label="Ver Vainilla Bourbon en la carta"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
                 <span class="fcard__glare" aria-hidden="true"></span>
               </div>
@@ -214,7 +213,7 @@
                   <h3>Turrón<br />de Jijona</h3>
                   <p>Almendra tostada y miel. Navidad, todo el año.</p>
                 </div>
-                <img class="fcard__img" src="/images/sabor-turron.webp" alt="Bola de helado de turrón" loading="lazy" width="900" height="691" />
+                <img class="fcard__img" src="/images/sabor-turron.webp" alt="Bola de helado de turrón" loading="lazy" width="680" height="522" decoding="async" />
                 <div class="fcard__foot"><span class="fcard__price">4,50 €</span><button class="round-btn round-btn--light" type="button" data-open-menu data-flavor="Turrón de Jijona" aria-label="Ver Turrón de Jijona en la carta"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
                 <span class="fcard__glare" aria-hidden="true"></span>
               </div>
@@ -225,7 +224,7 @@
                   <h3>Mango &amp;<br />Maracuyá</h3>
                   <p>Sorbete tropical, 100% fruta y vegano.</p>
                 </div>
-                <img class="fcard__img" src="/images/sabor-mango.webp" alt="Bola de sorbete de mango" loading="lazy" width="900" height="691" />
+                <img class="fcard__img" src="/images/sabor-mango.webp" alt="Bola de sorbete de mango" loading="lazy" width="680" height="522" decoding="async" />
                 <div class="fcard__foot"><span class="fcard__price">3,90 €</span><button class="round-btn round-btn--light" type="button" data-open-menu data-flavor="Mango & Maracuyá" aria-label="Ver Mango y Maracuyá en la carta"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
                 <span class="fcard__glare" aria-hidden="true"></span>
               </div>
@@ -250,7 +249,7 @@
         <div class="build__spot" aria-hidden="true"></div>
         <div class="build__stage" aria-hidden="true">
           <canvas class="build__canvas" id="buildCanvas"></canvas>
-          <img class="build__fallback" src="/images/copa.webp" alt="" loading="lazy" width="1200" height="1042" />
+          <img class="build__fallback" src="/images/copa.webp" alt="" loading="lazy" width="1200" height="1042" decoding="async" />
         </div>
 
         <div class="build__ui container">
@@ -284,7 +283,7 @@
       <div class="container story__grid">
         <figure class="story__media">
           <div class="story__mask">
-            <img src="/images/cucuruchos.webp" alt="Dos cucuruchos de helado de fresa y vainilla" loading="lazy" width="658" height="682" />
+            <img src="/images/cucuruchos.webp" alt="Dos cucuruchos de helado de fresa y vainilla" loading="lazy" width="658" height="682" decoding="async" />
           </div>
           <figcaption class="script story__caption">Mejores<br />ingredientes,<br />días más<br />brillantes</figcaption>
         </figure>
@@ -408,7 +407,7 @@
           </form>
           <p class="join__msg" id="joinMsg" role="status" aria-live="polite"></p>
         </div>
-        <div class="join__img" aria-hidden="true"><img src="/images/sabor-fresa.webp" alt="" loading="lazy" width="900" height="691" /></div>
+        <div class="join__img" aria-hidden="true"><img src="/images/sabor-fresa.webp" alt="" loading="lazy" width="680" height="522" decoding="async" /></div>
         <div class="join__green"><p class="script">La felicidad<br />llega en<br />bolas</p></div>
       </div>
     </section>

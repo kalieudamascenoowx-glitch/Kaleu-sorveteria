@@ -3,6 +3,15 @@
 import * as THREE from 'three';
 import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeometry.js';
 
+/* ---------------- quality tier ---------------- */
+// Phones/tablets get cheaper materials (no sheen/clearcoat lobes) and lighter meshes.
+export const LOW_Q = typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches;
+const Mat = (opts) => {
+  if (!LOW_Q) return new THREE.MeshPhysicalMaterial(opts);
+  const { sheen, sheenColor, sheenRoughness, clearcoat, clearcoatRoughness, transmission, ior, ...rest } = opts;
+  return new THREE.MeshStandardMaterial(rest);
+};
+
 /* ---------------- noise ---------------- */
 function hash3(x, y, z) {
   let h = x * 374761393 + y * 668265263 + z * 2147483647;
@@ -141,7 +150,10 @@ function scoopRadius(dir, seed) {
   return 1 + d;
 }
 
+const geoCache = new Map();
 export function createScoopGeometry(seed = 1, detail = 1) {
+  const key = 'scoop' + seed + ':' + detail;
+  if (geoCache.has(key)) return geoCache.get(key);
   const geo = new THREE.SphereGeometry(1, Math.round(80 * detail), Math.round(60 * detail));
   const pos = geo.attributes.position;
   const v = new THREE.Vector3();
@@ -165,6 +177,7 @@ export function createScoopGeometry(seed = 1, detail = 1) {
   }
   geo.computeVertexNormals();
   geo.userData.seed = seed;
+  geoCache.set(key, geo);
   return geo;
 }
 
@@ -173,7 +186,7 @@ export function scoopMaterial(flavor) {
   if (matCache.has(flavor)) return matCache.get(flavor);
   const f = FLAVORS[flavor];
   const bump = creamBump();
-  const m = new THREE.MeshPhysicalMaterial({
+  const m = Mat({
     color: f.color,
     roughness: flavor === 'chocolate' ? 0.48 : 0.6,
     bumpMap: bump,
@@ -200,7 +213,7 @@ function bitMaterial(kind) {
     almond: { color: '#c78d52', roughness: 0.75 },
     mango: { color: '#f08a1a', roughness: 0.4, clearcoat: 0.4 },
   };
-  bitMats[kind] = new THREE.MeshPhysicalMaterial(map[kind]);
+  bitMats[kind] = Mat(map[kind]);
   return bitMats[kind];
 }
 
@@ -242,14 +255,18 @@ export function createScoop(flavor, seed = 1, { detail = 1, drizzle = true } = {
     m.rotateZ(r() * Math.PI);
     group.add(m);
   }
-  if (drizzle && f.drizzle) group.add(createDrizzle(seed, f.drizzle));
+  if (drizzle && f.drizzle) group.add(createDrizzle(seed, f.drizzle, detail));
   return group;
 }
 
 /* ---------------- syrup drizzle ---------------- */
-export function createDrizzle(seed, color) {
-  // A sauce "cap" that hugs the top of the scoop and runs down in drips.
-  const geo = new THREE.SphereGeometry(1, 180, 120);
+export function createDrizzle(seed, color, detail = 1) {
+  // A sauce "cap" that hugs the top of the scoop and runs down in drips. Geometry is cached per seed.
+  const key = 'drizzle' + seed + ':' + detail;
+  const cached = geoCache.get(key);
+  const mat = Mat({ color, roughness: 0.1, clearcoat: 1, clearcoatRoughness: 0.04 });
+  if (cached) { const m = new THREE.Mesh(cached, mat); m.name = 'drizzle'; return m; }
+  const geo = new THREE.SphereGeometry(1, Math.round(128 * detail), Math.round(88 * detail));
   const pos = geo.attributes.position;
   const v = new THREE.Vector3();
   const r = rng(seed * 31 + 7);
@@ -276,7 +293,7 @@ export function createDrizzle(seed, color) {
     pos.setXYZ(i, v.x * rr, v.y * rr, v.z * rr);
   }
   geo.computeVertexNormals();
-  const mat = new THREE.MeshPhysicalMaterial({ color, roughness: 0.1, clearcoat: 1, clearcoatRoughness: 0.04, sheen: 0 });
+  geoCache.set(key, geo);
   const m = new THREE.Mesh(geo, mat);
   m.name = 'drizzle';
   return m;
@@ -295,13 +312,13 @@ export function createBowl({ label = true } = {}) {
   const profile = [...outer, ...rim, ...inner].map(([x, y]) => new THREE.Vector2(x, y));
   const geo = new THREE.LatheGeometry(profile, 128);
   geo.computeVertexNormals();
-  const mat = new THREE.MeshPhysicalMaterial({
+  const mat = Mat({
     color: '#efe4d3', roughness: 0.42, clearcoat: 0.55, clearcoatRoughness: 0.25, sheen: 0.3, sheenColor: '#fff',
   });
   const bowl = new THREE.Mesh(geo, mat);
   group.add(bowl);
   // speckles band (rim) for ceramic character
-  const rimMat = new THREE.MeshPhysicalMaterial({ color: '#d9c7ad', roughness: 0.5 });
+  const rimMat = new THREE.MeshStandardMaterial({ color: '#d9c7ad', roughness: 0.5 });
   const rimMesh = new THREE.Mesh(new THREE.TorusGeometry(1.425, 0.035, 12, 160), rimMat);
   rimMesh.rotation.x = Math.PI / 2;
   rimMesh.position.y = 1.14;
@@ -309,7 +326,7 @@ export function createBowl({ label = true } = {}) {
   if (label) {
     const band = outer.slice(5).map(([x, y]) => new THREE.Vector2(x * 1.004, y));
     const lg = new THREE.LatheGeometry(band, 128, -Math.PI * 0.5, Math.PI);
-    const lm = new THREE.Mesh(lg, new THREE.MeshPhysicalMaterial({
+    const lm = new THREE.Mesh(lg, new THREE.MeshStandardMaterial({
       map: bowlLabelTex(), transparent: true, roughness: 0.5, depthWrite: false,
     }));
     lm.name = 'label';
@@ -364,7 +381,7 @@ export function createMintLeaf(seed = 1) {
     p.setZ(i, -x * x * 1.2 + Math.sin(y * 4 + seed) * 0.03);
   }
   geo.computeVertexNormals();
-  const m = new THREE.Mesh(geo, new THREE.MeshPhysicalMaterial({
+  const m = new THREE.Mesh(geo, Mat({
     color: '#4f7a2c', roughness: 0.45, clearcoat: 0.5, side: THREE.DoubleSide, sheen: 0.5, sheenColor: '#b8e07a',
   }));
   m.name = 'mint';
@@ -390,7 +407,7 @@ export function createStrawberry(seed = 1) {
   }
   prof.push(new THREE.Vector2(0.001, 1.07));
   const geo = new THREE.LatheGeometry(prof, 40);
-  const body = new THREE.Mesh(geo, new THREE.MeshPhysicalMaterial({ map: seedsTex(), roughness: 0.28, clearcoat: 0.7, clearcoatRoughness: 0.2 }));
+  const body = new THREE.Mesh(geo, Mat({ map: seedsTex(), roughness: 0.28, clearcoat: 0.7, clearcoatRoughness: 0.2 }));
   group.add(body);
   const leafMat = new THREE.MeshStandardMaterial({ color: '#3f6b22', roughness: 0.6, side: THREE.DoubleSide });
   for (let i = 0; i < 7; i++) {
@@ -485,7 +502,9 @@ export function createSundae({ detail = 1 } = {}) {
 export const maxDpr = () => Math.min(window.devicePixelRatio || 1, window.matchMedia('(pointer: coarse)').matches ? 1.75 : 2);
 
 export function makeRenderer(canvas, { alpha = true } = {}) {
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha, powerPreference: 'high-performance', preserveDrawingBuffer: false });
+  // MSAA is wasted work on retina screens: the extra pixels already smooth the edges.
+  const antialias = (window.devicePixelRatio || 1) < 1.5;
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias, alpha, stencil: false, powerPreference: 'high-performance', preserveDrawingBuffer: false });
   renderer.setPixelRatio(maxDpr());
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.NeutralToneMapping;

@@ -178,16 +178,25 @@ export function initMarquees(reduced) {
     track.innerHTML += track.innerHTML; // two identical halves -> seamless -50%
     if (reduced) return;
     const tween = gsap.fromTo(track, { xPercent: dir > 0 ? 0 : -50 }, { xPercent: dir > 0 ? -50 : 0, duration: 26 * reps, ease: 'none', repeat: -1 });
-    let ts = { v: 1 };
-    ScrollTrigger.create({
+    // Velocity boost without allocating tweens on every scroll event:
+    // scroll only writes a target; one ticker callback eases timeScale toward it.
+    let target = 1, current = 1, dirSign = 1;
+    const st = ScrollTrigger.create({
       trigger: m, start: 'top bottom', end: 'bottom top',
-      onToggle: (s) => (s.isActive ? tween.play() : tween.pause()),
+      onToggle: (s) => {
+        if (s.isActive) { tween.play(); gsap.ticker.add(tick); } else { tween.pause(); gsap.ticker.remove(tick); }
+      },
       onUpdate(self) {
-        const v = gsap.utils.clamp(-6, 6, self.getVelocity() / 250);
-        gsap.to(ts, { v: (self.direction || 1) * Math.max(1, Math.abs(v)), duration: 0.2, overwrite: true, onUpdate: () => tween.timeScale(ts.v) });
-        gsap.to(ts, { v: self.direction || 1, duration: 1.2, delay: 0.25, overwrite: false, onUpdate: () => tween.timeScale(ts.v) });
+        if (self.direction) dirSign = self.direction;
+        target = dirSign * Math.max(1, Math.min(6, Math.abs(self.getVelocity()) / 250));
       },
     });
+    function tick() {
+      target += (dirSign - target) * 0.04;          // boost decays back to cruise speed
+      current += (target - current) * 0.12;
+      tween.timeScale(current);
+    }
+    if (st.isActive) gsap.ticker.add(tick);
   });
 }
 

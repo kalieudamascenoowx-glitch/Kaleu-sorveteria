@@ -48,6 +48,9 @@ export class BuildScene extends Stage {
       this.pointer.ty = (e.clientY / window.innerHeight) * 2 - 1;
     };
     window.addEventListener('pointermove', this._onPointer, { passive: true });
+    // render the finished cup once while off-screen so every shader/texture is ready before the user arrives
+    this.rig.setAll(1);
+    await this.warm();
     this.start();
   }
 

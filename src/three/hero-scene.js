@@ -44,9 +44,9 @@ export class HeroScene extends Stage {
       }));
       return mesh;
     };
-    const chocoMat = new THREE.MeshPhysicalMaterial({ color: '#3a1c10', roughness: 0.4, clearcoat: 0.4 });
-    const berryMat = new THREE.MeshPhysicalMaterial({ color: '#c2263c', roughness: 0.3, clearcoat: 0.6 });
-    const pistMat = new THREE.MeshPhysicalMaterial({ color: '#8a9a3a', roughness: 0.6 });
+    const chocoMat = new THREE.MeshStandardMaterial({ color: '#3a1c10', roughness: 0.35 });
+    const berryMat = new THREE.MeshStandardMaterial({ color: '#c2263c', roughness: 0.25 });
+    const pistMat = new THREE.MeshStandardMaterial({ color: '#8a9a3a', roughness: 0.6 });
     const n = mobile ? 5 : 8;
     this.fields = [
       makeField(new THREE.BoxGeometry(0.16, 0.06, 0.12), chocoMat, n, { x: 6, y: 2.9, z: 3 }),
@@ -54,7 +54,7 @@ export class HeroScene extends Stage {
       makeField(new THREE.IcosahedronGeometry(0.06, 0), pistMat, n, { x: 6, y: 2.9, z: 3 }),
     ];
     this.fields.forEach((f) => this.scene.add(f));
-    this._m = new THREE.Matrix4(); this._q = new THREE.Quaternion(); this._s = new THREE.Vector3(); this._p = new THREE.Vector3();
+    this._m = new THREE.Matrix4(); this._q = new THREE.Quaternion(); this._e = new THREE.Euler(); this._s = new THREE.Vector3(); this._p = new THREE.Vector3();
 
     // pointer (mouse + touch). Passive listeners, removed in dispose().
     this._onPointer = (e) => {
@@ -64,8 +64,11 @@ export class HeroScene extends Stage {
     window.addEventListener('pointermove', this._onPointer, { passive: true });
 
     this.baseRotY = -0.35;
-    this.rig.setAll(this.reduced ? 1 : 0);
+    // compile() skips invisible objects: warm up with everything visible, then hide for the intro
+    this.rig.setAll(1);
     this.updateFields(0);
+    await this.warm();
+    this.rig.setAll(this.reduced ? 1 : 0);
     this.start();
   }
 
@@ -119,7 +122,7 @@ export class HeroScene extends Stage {
           L.y + it.p.y * (L.scale || 1) * (L.mobile ? 1.3 : 1) + Math.sin(t * 0.8 + it.bob) * 0.12 - py * it.depth * 0.2 + this.scrollP * it.depth * 2,
           it.p.z
         );
-        this._q.setFromEuler(new THREE.Euler(it.rot.x + t * it.spin, it.rot.y + t * it.spin * 0.7, it.rot.z));
+        this._q.setFromEuler(this._e.set(it.rot.x + t * it.spin, it.rot.y + t * it.spin * 0.7, it.rot.z)); // reused: no per-frame garbage
         const k = it.s * (L.mobile ? 0.8 : 1) * (this.rig.state.chunks > 0.5 || this.reduced ? 1 : this.rig.state.chunks * 2);
         this._s.setScalar(Math.max(0.0001, k));
         this._m.compose(this._p, this._q, this._s);
